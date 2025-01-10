@@ -1,7 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FlashCard } from '../../type/flash-card.type';
+import {CommonModule} from '@angular/common';
+import {Component, Input} from '@angular/core';
+import {FlashCard} from '../../type/flash-card.type';
 
 @Component({
   standalone: true,
@@ -20,6 +19,7 @@ export class FlashCardsComponent {
   goToPrevious() {
     if (this.currentIndex > 0) {
       this.currentIndex--;
+      this.resetQuestionAnswer();
     } else {
       // set to end ??
     }
@@ -28,6 +28,7 @@ export class FlashCardsComponent {
   goToNext() {
     if (this.currentIndex < this.flashCards.length - 1) {
       this.currentIndex++;
+      this.resetQuestionAnswer();
     } else {
       // reshuffle cards
     }
@@ -35,5 +36,9 @@ export class FlashCardsComponent {
 
   toggleQuestionAnswer() {
     this.isQuestionVisible = !this.isQuestionVisible;
+  }
+
+  resetQuestionAnswer() {
+    this.isQuestionVisible = this.showQuestionFirst;
   }
 }

@@ -1,13 +1,24 @@
 <div class="popup-container" *ngIf="showPopup" (click)="closePopup()">
-    <div class="popup">
-        <div class="popup-content" (click)="$event.stopPropagation()">
-            <div class="popup-header">
-                <span class="popup-close" (click)="closePopup()">&times;</span>
-                <h2>Start {{subCategory.name}}</h2>
-            </div>
-            <div class="popup-body">
-
-            </div>
-        </div>
+  <div class="popup">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+      <div class="popup-header">
+        <span class="popup-close" (click)="closePopup()">&times;</span>
+        <h2>{{subCategory.name}}</h2>
+      </div>
+      <div class="popup-body">
+        <form [formGroup]="settingsForm">
+          <label>
+            <input type="checkbox" formControlName="isRandomOrder" /> In Random Order
+          </label>
+          <br />
+          <label>
+            <input type="checkbox" formControlName="showAnswerFirst" /> Show Question Then Answer
+          </label>
+        </form>
+      </div>
+      <div class="popup-footer">
+        <button (click)="closePopup()">Start</button>
+      </div>
     </div>
+  </div>
 </div>

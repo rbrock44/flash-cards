@@ -13,13 +13,16 @@
 
 .popup {
   position: relative;
-  width: 400px; /* Keep desktop size intact */
-  max-width: 90%; /* Allow scaling on smaller screens */
+  width: 250px;
+  height: 220px;
   padding: 20px;
   background-color: white;
   border: 1px solid #000;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .popup-content {
@@ -34,6 +37,10 @@
   margin-bottom: 15px;
 }
 
+.popup-footer {
+  padding-top: 10px;
+}
+
 .popup-close {
   cursor: pointer;
   font-size: 24px;
@@ -45,112 +52,22 @@
   font-size: 16px;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 14px;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-button[type="submit"],
-button.delete {
+button {
   background-color: #4CAF50;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  align-self: center;
 }
 
-button[type="submit"]:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-button.delete {
-  background-color: #f44336; /* Distinct color for delete */
-}
-
-.meeting-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px; /* Add spacing between buttons */
-}
-
-.autocomplete-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #ccc;
-  max-height: 150px;
-  overflow-y: auto;
-  position: absolute;
-  background-color: white;
-  width: 100%;
-  z-index: 1000;
-}
-
-.autocomplete-list li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.autocomplete-list li:hover {
-  background-color: #f0f0f0;
-}
-
-/* MOBILE-SPECIFIC STYLES */
-@media (max-width: 768px) {
-  .popup {
-    width: 100%; /* Full width for smaller screens */
-    max-width: 95%; /* Add slight padding for edge space */
-    padding: 15px; /* Reduce padding to save space */
-  }
-
-  .popup-header {
-    display: ruby;
-    gap: 10px; /* Add space between elements */
-  }
-
-  .popup-header h2 {
-    font-size: 18px; /* Adjust title font size */
-  }
-
-  .popup-close {
-    align-self: flex-end; /* Move close button to the right */
-  }
-
-  .popup-body {
-    font-size: 14px; /* Smaller font for mobile readability */
-  }
-
-  input[type="text"],
-  input[type="date"],
-  input[type="time"] {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  button[type="submit"],
-  button.delete {
-    width: 100%; /* Buttons take full width on small screens */
-    margin-top: 10px; /* Add spacing between buttons */
-  }
-
-  .meeting-buttons {
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: stretch;
-  }
+button:hover {
+  background-color: #45a049;
 }

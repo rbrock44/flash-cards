@@ -52,10 +52,6 @@ export class AppComponent implements OnInit {
   subCategoryClick(subCategory: SubCategory) {
     this.selectedSubCategory = subCategory;
     this.startPopup.openPopup(subCategory);
-
-    this.flashCards = subCategory.flashCards;
-
-    this.flashCardReady = true;
   }
 
   homeClick(): void {
@@ -66,9 +62,20 @@ export class AppComponent implements OnInit {
 
   startFlashCards(settings: StartSettings) {
     this.settings = settings;
-    // TODO: order flashcards based on settings
-    this.flashCards = this.selectedSubCategory!.flashCards;
+    if (settings.isIndexOrder) {
+      this.flashCards = this.selectedSubCategory!.flashCards;
+    } else {
+      this.flashCards = this.shuffleArray(this.selectedSubCategory!.flashCards);
+    }
 
     this.flashCardReady = true;
+  }
+
+  shuffleArray<T>(array: T[]): T[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1)); // Generate a random index
+      [array[i], array[j]] = [array[j], array[i]];  // Swap elements
+    }
+    return array;
   }
 }
