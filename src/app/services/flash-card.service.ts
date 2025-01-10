@@ -1,8 +1,10 @@
-import {FlashcardsData} from "../type/flash-card.type";
+import {FlashcardsData, MainCategory} from "../type/flash-card.type";
 
-export async function getFlashCards(): Promise<FlashcardsData> {
+const baseUrl = 'https://home-page-api-34607.herokuapp.com/flash-cards';
+
+export async function getFlashCards(): Promise<MainCategory[]> {
   try {
-    const response = await fetch('https://raw.githubusercontent.com/rbrock44/flash-cards-data/master/flash-card-data.json', {
+    const response = await fetch(baseUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -10,25 +12,22 @@ export async function getFlashCards(): Promise<FlashcardsData> {
       cache: 'no-store',
     });
 
-    return (await response.json()) as FlashcardsData;
+    return (await response.json()) as MainCategory[];
   } catch (error) {
     console.log(error);
     return getLocalCards();
-    return {
-      categories: [
+    return  [
         {
           id: '',
           name: 'Error Retrieving Flash Card Data',
           subCategories: []
         }
-      ]
-    };
+      ];
   }
 }
 
-function getLocalCards(): Promise<FlashcardsData> {
-  return Promise.resolve({
-    categories: [
+function getLocalCards(): Promise<MainCategory[]> {
+  return Promise.resolve([
       {
         id: '1',
         name: 'Medical Coding',
@@ -199,5 +198,5 @@ function getLocalCards(): Promise<FlashcardsData> {
         ]
       }
     ]
-  });
+  );
 }
