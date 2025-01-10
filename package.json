@@ -7,7 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:flash-cards": "node dist/flash-cards/server/server.mjs"
+    "serve:ssr:flash-cards": "node dist/flash-cards/server/server.mjs",
+    "gh-pages": "gh-pages -d dist/cleaning-schedule/browser",
+    "deploy": "ng build --base-href=https://rbrock44.github.io/flash-cards/",
+    "prod": "npm run deploy && npm run gh-pages"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +25,7 @@
     "@angular/router": "^18.0.0",
     "@angular/ssr": "^18.0.7",
     "express": "^4.18.2",
+    "gh-pages": "^6.1.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
