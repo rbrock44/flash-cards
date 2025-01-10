@@ -28,13 +28,15 @@
         <p><strong>Sub Category:</strong> {{this.selectedSubCategory?.name}}</p>
 
         <app-flash-cards
-          [showQuestionFirst]="true"
+          [showQuestionFirst]="settings.showQuestionFirst"
           [flashCards]="flashCards">
         </app-flash-cards>
       </div>
 
     </div>
   </div>
+
+  <app-start-popup #startPopup (startFlashCards)="startFlashCards($event)"/>
 </main>
 
 <router-outlet />

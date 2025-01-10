@@ -1,0 +1,13 @@
+<div class="popup-container" *ngIf="showPopup" (click)="closePopup()">
+    <div class="popup">
+        <div class="popup-content" (click)="$event.stopPropagation()">
+            <div class="popup-header">
+                <span class="popup-close" (click)="closePopup()">&times;</span>
+                <h2>Start {{subCategory.name}}</h2>
+            </div>
+            <div class="popup-body">
+
+            </div>
+        </div>
+    </div>
+</div>

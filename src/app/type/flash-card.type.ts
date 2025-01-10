@@ -19,3 +19,8 @@ export interface MainCategory {
 export interface FlashcardsData {
   categories: MainCategory[];
 }
+
+export interface StartSettings {
+  showQuestionFirst: boolean;
+  isIndexOrder: boolean;
+}
