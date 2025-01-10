@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:flash-cards": "node dist/flash-cards/server/server.mjs",
-    "gh-pages": "gh-pages -d dist/cleaning-schedule/browser",
+    "gh-pages": "gh-pages -d dist/flash-cards/browser",
     "deploy": "ng build --base-href=https://rbrock44.github.io/flash-cards/",
     "prod": "npm run deploy && npm run gh-pages"
   },

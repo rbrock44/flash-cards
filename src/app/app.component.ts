@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {getFlashCards} from "./services/flash-card.service";
-import {FlashcardsData, SubCategory} from "./type/flash-card.type";
+import {FlashcardsData, MainCategory, SubCategory} from "./type/flash-card.type";
 import {CommonModule} from "@angular/common";
 
 @Component({
@@ -17,8 +17,10 @@ import {CommonModule} from "@angular/common";
 })
 export class AppComponent implements OnInit {
   title = 'flash-cards';
-  selectedCategory = undefined;
+  selectedCategory: MainCategory | undefined = undefined;
+  selectedSubCategory: SubCategory | undefined = undefined;
   data: FlashcardsData = { categories: [] };
+  flashCardReady: boolean = false;
 
   ngOnInit(): void {
     getFlashCards().then((response) => {
@@ -29,7 +31,7 @@ export class AppComponent implements OnInit {
   toggleCategory(category: any, event: Event) {
     const target = event.target as HTMLElement;
 
-    if (target.tagName === 'P' && target.className.includes('sub-categories')) {
+    if (target.tagName === 'LI') {
       return;
     }
 
@@ -41,6 +43,8 @@ export class AppComponent implements OnInit {
   }
 
   subCategoryClick(subCategory: SubCategory) {
+    this.selectedSubCategory = subCategory;
 
+    this.flashCardReady = true;
   }
 }
