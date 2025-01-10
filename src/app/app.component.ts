@@ -31,7 +31,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     getFlashCards().then((response) => {
-      this.data = response;
+      this.data = {
+        categories: response
+      };
     });
   }
 
