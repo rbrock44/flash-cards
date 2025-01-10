@@ -20,9 +20,17 @@
           </ul>
         </div>
       </div>
-      <div *ngIf="this.flashCardReady">
-        <p>{{this.selectedCategory?.name}}</p>
-        <p>{{this.selectedSubCategory?.name}}</p>
+      <div *ngIf="this.flashCardReady" class="flash-cards-container">
+        <div class="sticky-header">
+          <p (click)="homeClick()" class="home-button">Home</p>
+        </div>
+        <p><strong>Main Category:</strong> {{this.selectedCategory?.name}}</p>
+        <p><strong>Sub Category:</strong> {{this.selectedSubCategory?.name}}</p>
+
+        <app-flash-cards
+          [showQuestionFirst]="true"
+          [flashCards]="flashCards">
+        </app-flash-cards>
       </div>
 
     </div>
