@@ -5,7 +5,11 @@
       &#8592;
     </button>
 
-    <button (click)="toggleQuestionAnswer()" class="flash-card-button">
+    <button
+      (click)="toggleQuestionAnswer()"
+      [ngClass]="{ 'question-visible': isQuestionVisible, 'answer-visible': !isQuestionVisible }"
+      class="flash-card-button"
+    >
       {{ isQuestionVisible ? flashCards[currentIndex].question : flashCards[currentIndex].answer }}
     </button>
 
