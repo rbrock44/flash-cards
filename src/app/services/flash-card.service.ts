@@ -15,20 +15,11 @@ export async function getFlashCards(): Promise<FlashcardsData> {
     return (await response.json()) as FlashcardsData;
   } catch (error) {
     console.log(error);
-    return getLocalCards();
-    return {
-      categories: [
-        {
-          id: '',
-          name: 'Error Retrieving Flash Card Data',
-          subCategories: []
-        }
-      ]
-    };
+    return getLocalCards(error);
   }
 }
 
-function getLocalCards(): Promise<FlashcardsData> {
+function getLocalCards(error: any): Promise<FlashcardsData> {
   return Promise.resolve({
     categories: [
       {
@@ -199,6 +190,11 @@ function getLocalCards(): Promise<FlashcardsData> {
             ]
           }
         ]
+      },
+      {
+        id: '2',
+        name: `${error}`,
+        subCategories: []
       }
     ]
   });
