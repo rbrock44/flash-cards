@@ -38,6 +38,10 @@ export class StartPopupComponent {
   }
 
   closePopup() {
+    this.showPopup = false;
+  }
+
+  start() {
     this.emitSettings();
     this.showPopup = false;
   }
