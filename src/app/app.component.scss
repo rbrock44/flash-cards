@@ -110,3 +110,8 @@ p {
   justify-content: center;
 }
 
+@media (max-width: 460px) {
+  .container {
+    width: 80%;
+  }
+}

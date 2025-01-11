@@ -27,10 +27,12 @@
 
 .left-arrow {
   margin-right: 10px;
+  margin-left: 20px;
 }
 
 .right-arrow {
   margin-left: 10px;
+  margin-right: 20px;
 }
 
 .arrow-button:hover {
@@ -66,4 +68,14 @@
   font-weight: bold;
   color: #333;
   padding-bottom: 10px;
+}
+
+@media (max-width: 400px) {
+  .left-arrow {
+    margin-left: 10px;
+  }
+
+  .right-arrow {
+    margin-right: 10px;
+  }
 }
