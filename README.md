@@ -1,5 +1,9 @@
 # FlashCards
 
+[Live Url](https://rbrock44.github.io/flash-cards/)
+
+This server side angular project is powered by a single json file located in this [repo](https://github.com/rbrock44/flash-cards-data) 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
 
 ## Development server
