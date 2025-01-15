@@ -21,6 +21,7 @@ export class StartPopupComponent {
     flashCards: []
   }
   @Output() startFlashCards = new EventEmitter<StartSettings>();
+  @Input() showExampleOption = false;
   showPopup: boolean = false;
 
   settingsForm: FormGroup;
@@ -28,7 +29,8 @@ export class StartPopupComponent {
   constructor(private fb: FormBuilder) {
     this.settingsForm = this.fb.group({
       isRandomOrder: [false],
-      showAnswerFirst: [false]
+      showAnswerFirst: [false],
+      showExampleManually: [false]
     });
   }
 
@@ -49,7 +51,8 @@ export class StartPopupComponent {
   private emitSettings() {
     const settings: StartSettings = {
       isIndexOrder: !this.settingsForm.get('isRandomOrder')?.value,
-      showQuestionFirst: !this.settingsForm.get('showAnswerFirst')?.value
+      showQuestionFirst: !this.settingsForm.get('showAnswerFirst')?.value,
+      showExampleAutomatically: !this.settingsForm.get('showExampleManually')?.value,
     };
     this.startFlashCards.emit(settings);
   }

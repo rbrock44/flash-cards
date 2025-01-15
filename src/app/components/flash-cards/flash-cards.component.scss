@@ -43,6 +43,7 @@
   height: 100px; /* Same height as arrow buttons */
   font-size: 1.2rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px 20px;
@@ -67,4 +68,15 @@
   font-weight: bold;
   color: #333;
   padding-bottom: 10px;
+}
+
+.example-container {
+  padding-bottom: 10px;
+}
+
+.example-button {
+  font-size: .8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }

@@ -26,7 +26,11 @@ export class AppComponent implements OnInit {
   selectedSubCategory: SubCategory | undefined = undefined;
   flashCards: FlashCard[] = [];
   data: FlashcardsData = { categories: [] };
-  settings: StartSettings = { showQuestionFirst: true, isIndexOrder: true};
+  settings: StartSettings = {
+    showQuestionFirst: true,
+    isIndexOrder: true,
+    showExampleAutomatically: true,
+  };
   flashCardReady: boolean = false;
 
   ngOnInit(): void {
@@ -77,5 +81,9 @@ export class AppComponent implements OnInit {
       [array[i], array[j]] = [array[j], array[i]];  // Swap elements
     }
     return array;
+  }
+
+  showExample(): boolean {
+    return this.selectedSubCategory ? this.selectedSubCategory.flashCards.filter(x => x.example != '').length > 0 : false;
   }
 }

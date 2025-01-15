@@ -13,8 +13,10 @@ export class FlashCardsComponent {
   @Input() flashCards: FlashCard[] = [];
   currentIndex: number = 0; // Initialize at 0 for the first flashcard
   @Input() showQuestionFirst: boolean = true;
+  @Input() showExampleAutomatically: boolean = true;
 
   isQuestionVisible: boolean = this.showQuestionFirst;
+  isExampleVisible: boolean = this.showExampleAutomatically;
 
   goToPrevious() {
     if (this.currentIndex > 0) {
@@ -34,8 +36,17 @@ export class FlashCardsComponent {
     }
   }
 
-  toggleQuestionAnswer() {
+  toggleQuestionAnswer(event: any) {
+    console.log(event)
+    if (event.target.classList.contains('example-button')) {
+      return;
+    }
     this.isQuestionVisible = !this.isQuestionVisible;
+  }
+
+  toggleExample(event: any) {
+    event.preventDefault();
+    this.isExampleVisible = !this.isExampleVisible;
   }
 
   resetQuestionAnswer() {

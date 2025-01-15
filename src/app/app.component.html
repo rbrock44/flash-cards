@@ -36,7 +36,11 @@
     </div>
   </div>
 
-  <app-start-popup #startPopup (startFlashCards)="startFlashCards($event)"/>
+  <app-start-popup
+    #startPopup
+    [showExampleOption]="showExample()"
+    (startFlashCards)="startFlashCards($event)"
+  />
 </main>
 
 <router-outlet />

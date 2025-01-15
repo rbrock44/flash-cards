@@ -6,10 +6,18 @@
     </button>
 
     <button
-      (click)="toggleQuestionAnswer()"
+      (click)="toggleQuestionAnswer($event)"
       [ngClass]="{ 'question-visible': isQuestionVisible, 'answer-visible': !isQuestionVisible }"
       class="flash-card-button"
     >
+      <div
+        class="example-container"
+        *ngIf="isQuestionVisible && flashCards[currentIndex].example != ''"
+      >
+        <button (click)="toggleExample($event)" class="example-button">
+          {{isExampleVisible ? flashCards[currentIndex].example : 'Example'}}
+        </button>
+      </div>
       {{ isQuestionVisible ? flashCards[currentIndex].question : flashCards[currentIndex].answer }}
     </button>
 

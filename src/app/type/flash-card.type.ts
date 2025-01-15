@@ -2,6 +2,7 @@ export interface FlashCard {
   id: string;
   question: string;
   answer: string;
+  example: string;
 }
 
 export interface SubCategory {
@@ -23,4 +24,5 @@ export interface FlashcardsData {
 export interface StartSettings {
   showQuestionFirst: boolean;
   isIndexOrder: boolean;
+  showExampleAutomatically: boolean;
 }
