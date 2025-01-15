@@ -62,4 +62,10 @@ export class FlashCardsComponent implements OnInit {
   resetExample() {
     this.isExampleVisible = this.showExampleAutomatically;
   }
+
+  showExample(): boolean {
+    return this.isQuestionVisible && 
+      this.flashCards[this.currentIndex].example != undefined &&
+      (this.flashCards[this.currentIndex].example ?? '').trim().length > 0
+  }
 }
