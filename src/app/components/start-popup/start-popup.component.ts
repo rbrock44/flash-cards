@@ -30,7 +30,7 @@ export class StartPopupComponent {
     this.settingsForm = this.fb.group({
       isRandomOrder: [false],
       showAnswerFirst: [false],
-      showExampleManually: [false]
+      showExampleAutomatically: [false]
     });
   }
 
@@ -52,7 +52,7 @@ export class StartPopupComponent {
     const settings: StartSettings = {
       isIndexOrder: !this.settingsForm.get('isRandomOrder')?.value,
       showQuestionFirst: !this.settingsForm.get('showAnswerFirst')?.value,
-      showExampleAutomatically: !this.settingsForm.get('showExampleManually')?.value,
+      showExampleAutomatically: this.settingsForm.get('showExampleAutomatically')?.value,
     };
     this.startFlashCards.emit(settings);
   }

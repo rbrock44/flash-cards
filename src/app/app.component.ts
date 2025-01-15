@@ -84,6 +84,6 @@ export class AppComponent implements OnInit {
   }
 
   showExample(): boolean {
-    return this.selectedSubCategory ? this.selectedSubCategory.flashCards.filter(x => x.example != '').length > 0 : false;
+    return this.selectedSubCategory ? this.selectedSubCategory.flashCards.filter(x => x.example.trim().length > 0).length > 0 : false;
   }
 }
