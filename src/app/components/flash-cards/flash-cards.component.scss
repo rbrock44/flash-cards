@@ -75,8 +75,14 @@
 }
 
 .example-button {
-  font-size: .8rem;
+  font-size: 1rem;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.type-container {
+  font-size: 1rem;
+  color: #2F2F2F;
+  padding-bottom: 10px;
 }

@@ -2,7 +2,8 @@ export interface FlashCard {
   id: string;
   question: string;
   answer: string;
-  example: string | undefined;
+  example?: string | undefined;
+  type?: string | undefined;
 }
 
 export interface SubCategory {

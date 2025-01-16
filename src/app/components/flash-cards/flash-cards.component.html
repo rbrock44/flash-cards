@@ -11,6 +11,12 @@
       class="flash-card-button"
     >
       <div
+        class="type-container"
+        *ngIf="showType()"
+      >
+        {{flashCards[currentIndex].type}}
+      </div>
+      <div
         class="example-container"
         *ngIf="showExample()"
       >
