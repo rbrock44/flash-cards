@@ -26,13 +26,13 @@ jobs:
 
     - name: Build Project
       run: npm run deploy
+    
+    - name: Add CNAME
+      run: |
+        cp CNAME ./dist/CNAME
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist/flash-cards/browser
-    
-    - name: Add CNAME
-      run: |
-        cp CNAME ./dist/CNAME
