@@ -1,8 +1,9 @@
 # FlashCards
 
-[Live Url](https://rbrock44.github.io/flash-cards/)
+[Live Url](https://flash-cards.ryan-brock.com/)
 
-This server side angular project is powered by a single json file located in this [repo](https://github.com/rbrock44/flash-cards-data) 
+This server side angular project is powered by a single json file located in this [repo](https://github.com/rbrock44/flash-cards-data) <br/>
+It's purpose was to assist an individual going through a medical coding class. It's been set up to expand far beyond that with several variations of a flash card (per category).
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
 
