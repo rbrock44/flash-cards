@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
             showExampleAutomatically: showExampleParam,
           };
 
-          this.startFlashCardsFromUrlParams(newSettings. idsInOrder);
+          this.startFlashCardsFromUrlParams(newSettings, idsInOrderParam);
         }
       }
     });
