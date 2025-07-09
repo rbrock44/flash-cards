@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
           const isIndexOrderParam = queryParams.get(this.isIndexOrderUrlParam) === 'true';
           const showExampleParam = queryParams.get(this.showExampleUrlParam) === 'true';
 
-          const idsInOrderParam = (queryParams.get(this.idsInOrderUrlParam) ?? '').split(',');
+          const idsInOrderParam = (queryParams.get(this.idsInOrderUrlParam) ?? '').split('-');
 
           const newSettings = {
             isIndexOrder: showQuestionParam,
@@ -153,7 +153,7 @@ export class AppComponent implements OnInit {
       queryParams.set(this.showQuestionUrlParam, this.settings.showQuestionFirst ? 'true' : 'false');
       queryParams.set(this.isIndexOrderUrlParam, this.settings.isIndexOrder ? 'true' : 'false');
       queryParams.set(this.showExampleUrlParam, this.settings.showExampleAutomatically ? 'true' : 'false');
-      queryParams.set(this.idsInOrderUrlParam, cardIdsOrdered.join(','));
+      queryParams.set(this.idsInOrderUrlParam, cardIdsOrdered.join('-'));
 
     }
 
