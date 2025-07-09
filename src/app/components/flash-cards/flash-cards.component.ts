@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import {CommonModule, Location} from '@angular/common';
 import {Component, Input, OnInit} from '@angular/core';
 import {FlashCard} from '../../type/flash-card.type';
 
@@ -11,12 +11,16 @@ import {FlashCard} from '../../type/flash-card.type';
 })
 export class FlashCardsComponent implements OnInit {
   @Input() flashCards: FlashCard[] = [];
-  currentIndex: number = 0; // Initialize at 0 for the first flashcard
+  @Input() currentIndex: number = 0; // Initialize at 0 for the first flashcard
   @Input() showQuestionFirst: boolean = true;
   @Input() showExampleAutomatically: boolean = true;
 
   isQuestionVisible: boolean = this.showQuestionFirst;
   isExampleVisible: boolean = this.showExampleAutomatically;
+
+  cardIndexUrlParam: string = 'cardIndex';
+
+  constructor(private location: Location) {}
 
   ngOnInit() {
     this.isQuestionVisible = this.showQuestionFirst;
@@ -28,6 +32,8 @@ export class FlashCardsComponent implements OnInit {
       this.currentIndex--;
       this.resetQuestionAnswer();
       this.resetExample();
+
+      this.replaceUrlParam(this.currentIndex);
     } else {
       // set to end ??
     }
@@ -38,6 +44,8 @@ export class FlashCardsComponent implements OnInit {
       this.currentIndex++;
       this.resetQuestionAnswer();
       this.resetExample();
+
+      this.replaceUrlParam(this.currentIndex);
     } else {
       // reshuffle cards
     }
@@ -72,5 +80,17 @@ export class FlashCardsComponent implements OnInit {
   showType(): boolean {
     return !this.isQuestionVisible &&
       this.flashCards[this.currentIndex].type != undefined
+  }
+
+  private replaceImageUrlParam(index: number): void {
+    const url = this.buildImageUrl(index.toString());
+    this.location.replaceState(url);
+  }
+
+  private buildUrl(index: string): string {
+    const queryParams = new URLSearchParams(window.location.search);
+    queryParams.set(this.cardIndexUrlParam, index);
+
+    return `${location.pathname}?${queryParams.toString()}`;
   }
 }

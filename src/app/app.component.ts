@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
     showExampleAutomatically: true,
   };
   flashCardReady: boolean = false;
+  cardIndex = 0;
 
   categoryUrlParam: string = 'category';
   subCategoryUrlParam: string = 'subCategory';
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
   isIndexOrderUrlParam: string = 'isIndexOrder';
   showExampleUrlParam: string = 'showExampleAutomatically';
   idsInOrderUrlParam: string = 'idsInOrder';
+  cardIndexUrlParam: string = 'cardIndex';
 
   constructor(
       private location: Location
@@ -63,6 +65,9 @@ export class AppComponent implements OnInit {
           const showExampleParam = queryParams.get(this.showExampleUrlParam) === 'true';
 
           const idsInOrderParam = (queryParams.get(this.idsInOrderUrlParam) ?? '').split('-');
+
+          const index = +queryParams.get(this.cardIndexUrlParam);
+          this.cardIndex = index;
 
           const newSettings = {
             isIndexOrder: showQuestionParam,
