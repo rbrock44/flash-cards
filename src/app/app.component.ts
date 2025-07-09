@@ -41,7 +41,6 @@ export class AppComponent implements OnInit {
   idsInOrderUrlParam: string = 'idsInOrder';
 
   constructor(
-      private route: ActivatedRoute,
       private location: Location
   ) {}
 
@@ -54,18 +53,24 @@ export class AppComponent implements OnInit {
       const subCategoryParam = queryParams.get(this.subCategoryUrlParam);
 
       if (categoryParam) {
-        this.selectedCategory = this.data.categories.find(x -> x.name === categoryParam);
+        this.selectedCategory = this.data.categories.find(x => x.name === categoryParam);
 
         if (subCategoryParam) {
-          this.selectedSubCategory = this.selectedCategory.subCategories.find(x -> x.name === subCategoryParam)
+          this.selectedSubCategory = this.selectedCategory!.subCategories.find(x => x.name === subCategoryParam)
 
           const showQuestionParam = queryParams.get(this.showQuestionUrlParam) === 'true';
           const isIndexOrderParam = queryParams.get(this.isIndexOrderUrlParam) === 'true';
           const showExampleParam = queryParams.get(this.showExampleUrlParam) === 'true';
 
-          const idsInOrderParam = queryParams.get(this.idsInOrderUrlParam).split(',');
+          const idsInOrderParam = (queryParams.get(this.idsInOrderUrlParam) ?? '').split(',');
 
-          this.startFlashCardsFromUrlParams(settings);
+          const newSettings = {
+            isIndexOrder: showQuestionParam,
+            showQuestionFirst: showQuestionParam,
+            showExampleAutomatically: showExampleParam,
+          };
+
+          this.startFlashCardsFromUrlParams(newSettings. idsInOrder);
         }
       }
     });
@@ -107,14 +112,14 @@ export class AppComponent implements OnInit {
     } else {
       this.flashCards = this.shuffleArray(this.selectedSubCategory!.flashCards);
     }
-    const ids = this.flashCards.map(x -> x.id);
+    const ids = this.flashCards.map(x => x.id);
 
     this.flashCardReady = true;
 
-    this.location.replaceState(this.buildUrl(this.selectedCategory.name, this.selectedSubCategory.name, ids));
+    this.location.replaceState(this.buildUrl(this.selectedCategory!.name, this.selectedSubCategory!.name, ids));
   }
 
-  startFlashCardsFromUrlParams(settings: StartSettings: ids: string[]) {
+  startFlashCardsFromUrlParams(settings: StartSettings, ids: string[]) {
     this.settings = settings;
     this.flashCards = this.selectedSubCategory!.flashCards.sort((a, b) => {
       return ids.indexOf(a.id) - ids.indexOf(b.id);
@@ -135,14 +140,14 @@ export class AppComponent implements OnInit {
     return this.selectedSubCategory ? this.selectedSubCategory.flashCards.filter(x => x.example && x.example.trim().length > 0).length > 0 : false;
   }
 
-  private buildUrl(category: string | null | undefined, subCategory: string | null | undefined, cardIdsOrdered: string[] = []): string {
+  private buildUrl(category: string | null | undefined = '', subCategory: string | null | undefined = '', cardIdsOrdered: string[] = []): string {
     const queryParams = new URLSearchParams();
 
-    if (category !== null && category !== '') {
+    if (category !== null && category !== undefined && category !== '') {
       queryParams.set(this.categoryUrlParam, category);
     }
 
-    if (project !== null) {
+    if (subCategory !== null && subCategory !== undefined && subCategory !== '') {
       queryParams.set(this.subCategoryUrlParam, subCategory);
 
       queryParams.set(this.showQuestionUrlParam, this.settings.showQuestionFirst ? 'true' : 'false');
