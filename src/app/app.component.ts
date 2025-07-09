@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {getFlashCards} from "./services/flash-card.service";
 import {FlashCard, FlashcardsData, MainCategory, StartSettings, SubCategory} from "./type/flash-card.type";
-import {CommonModule} from "@angular/common";
+import {CommonModule, Location} from "@angular/common";
 import {FlashCardsComponent} from "./components/flash-cards/flash-cards.component";
 import {StartPopupComponent} from "./components/start-popup/start-popup.component";
 
@@ -33,9 +33,41 @@ export class AppComponent implements OnInit {
   };
   flashCardReady: boolean = false;
 
+  categoryUrlParam: string = 'category';
+  subCategoryUrlParam: string = 'subCategory';
+  showQuestionUrlParam: string = 'showQuestionFirst';
+  isIndexOrderUrlParam: string = 'isIndexOrder';
+  showExampleUrlParam: string = 'showExampleAutomatically';
+  idsInOrderUrlParam: string = 'idsInOrder';
+
+  constructor(
+      private route: ActivatedRoute,
+      private location: Location
+  ) {}
+
   ngOnInit(): void {
     getFlashCards().then((response) => {
       this.data = response;
+
+      const queryParams = new URLSearchParams(window.location.search);
+      const categoryParam = queryParams.get(this.categoryUrlParam);
+      const subCategoryParam = queryParams.get(this.subCategoryUrlParam);
+
+      if (categoryParam) {
+        this.selectedCategory = this.data.categories.find(x -> x.name === categoryParam);
+
+        if (subCategoryParam) {
+          this.selectedSubCategory = this.selectedCategory.subCategories.find(x -> x.name === subCategoryParam)
+
+          const showQuestionParam = queryParams.get(this.showQuestionUrlParam) === 'true';
+          const isIndexOrderParam = queryParams.get(this.isIndexOrderUrlParam) === 'true';
+          const showExampleParam = queryParams.get(this.showExampleUrlParam) === 'true';
+
+          const idsInOrderParam = queryParams.get(this.idsInOrderUrlParam).split(',');
+
+          this.startFlashCardsFromUrlParams(settings);
+        }
+      }
     });
   }
 
@@ -51,6 +83,8 @@ export class AppComponent implements OnInit {
     } else {
       this.selectedCategory = category;
     }
+
+    this.location.replaceState(this.buildUrl(this.selectedCategory?.name));
   }
 
   subCategoryClick(subCategory: SubCategory) {
@@ -62,6 +96,8 @@ export class AppComponent implements OnInit {
     this.flashCardReady = false;
     this.selectedCategory = undefined;
     this.selectedSubCategory = undefined;
+
+    this.location.replaceState(this.buildUrl());
   }
 
   startFlashCards(settings: StartSettings) {
@@ -71,6 +107,18 @@ export class AppComponent implements OnInit {
     } else {
       this.flashCards = this.shuffleArray(this.selectedSubCategory!.flashCards);
     }
+    const ids = this.flashCards.map(x -> x.id);
+
+    this.flashCardReady = true;
+
+    this.location.replaceState(this.buildUrl(this.selectedCategory.name, this.selectedSubCategory.name, ids));
+  }
+
+  startFlashCardsFromUrlParams(settings: StartSettings: ids: string[]) {
+    this.settings = settings;
+    this.flashCards = this.selectedSubCategory!.flashCards.sort((a, b) => {
+      return ids.indexOf(a.id) - ids.indexOf(b.id);
+    });
 
     this.flashCardReady = true;
   }
@@ -85,5 +133,30 @@ export class AppComponent implements OnInit {
 
   showExample(): boolean {
     return this.selectedSubCategory ? this.selectedSubCategory.flashCards.filter(x => x.example && x.example.trim().length > 0).length > 0 : false;
+  }
+
+  private buildUrl(category: string | null | undefined, subCategory: string | null | undefined, cardIdsOrdered: string[] = []): string {
+    const queryParams = new URLSearchParams();
+
+    if (category !== null && category !== '') {
+      queryParams.set(this.categoryUrlParam, category);
+    }
+
+    if (project !== null) {
+      queryParams.set(this.subCategoryUrlParam, subCategory);
+
+      queryParams.set(this.showQuestionUrlParam, this.settings.showQuestionFirst ? 'true' : 'false');
+      queryParams.set(this.isIndexOrderUrlParam, this.settings.isIndexOrder ? 'true' : 'false');
+      queryParams.set(this.showExampleUrlParam, this.settings.showExampleAutomatically ? 'true' : 'false');
+      queryParams.set(this.idsInOrderUrlParam, cardIdsOrdered.join(','));
+
+    }
+
+    const end = queryParams.toString();
+    if (end !== '') {
+      return `${location.pathname}?${queryParams.toString()}`;
+    } else {
+      return location.pathname;
+    }
   }
 }
