@@ -82,8 +82,8 @@ export class FlashCardsComponent implements OnInit {
       this.flashCards[this.currentIndex].type != undefined
   }
 
-  private replaceImageUrlParam(index: number): void {
-    const url = this.buildImageUrl(index.toString());
+  private replaceUrlParam(index: number): void {
+    const url = this.buildUrl(index.toString());
     this.location.replaceState(url);
   }
 

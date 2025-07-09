@@ -66,7 +66,8 @@ export class AppComponent implements OnInit {
 
           const idsInOrderParam = (queryParams.get(this.idsInOrderUrlParam) ?? '').split('-');
 
-          const index = +queryParams.get(this.cardIndexUrlParam);
+          const ind = queryParams.get(this.cardIndexUrlParam);
+          const index = +(ind ? ind : '0');
           this.cardIndex = index;
 
           const newSettings = {
