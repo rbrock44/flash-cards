@@ -1,7 +1,7 @@
 # FlashCards
 
 > This project hosts links and descriptions of software projects I've created <br/>
-> [Live - Ryan's Website Directory](https://flash-cards.ryan-brock.com/)
+> [Live - Flash Cards Website](https://flash-cards.ryan-brock.com/)
 
 ---
 
