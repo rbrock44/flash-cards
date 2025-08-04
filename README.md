@@ -27,8 +27,6 @@ It's purpose was to assist my girlfriend going through a medical coding class. I
 
 ## 🛠 Technologies
 
-List the tools, languages, or frameworks used.
-
 - Framework: `Angular 18`
 - Testing: `Karma`,
 - Deployment: `GitHub Pages`
