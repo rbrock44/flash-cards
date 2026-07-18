@@ -3,11 +3,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FlashCard} from '../../type/flash-card.type';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule],
-  selector: 'app-flash-cards',
-  templateUrl: './flash-cards.component.html',
-  styleUrls: ['./flash-cards.component.scss'],
+    imports: [CommonModule],
+    selector: 'app-flash-cards',
+    templateUrl: './flash-cards.component.html',
+    styleUrls: ['./flash-cards.component.scss']
 })
 export class FlashCardsComponent implements OnInit {
   @Input() flashCards: FlashCard[] = [];

@@ -4,15 +4,14 @@ import {StartSettings, SubCategory} from "../../type/flash-card.type";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-start-popup',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './start-popup.component.html',
-  styleUrl: './start-popup.component.scss'
+    selector: 'app-start-popup',
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './start-popup.component.html',
+    styleUrl: './start-popup.component.scss'
 })
 export class StartPopupComponent {
   subCategory: SubCategory = {

@@ -7,17 +7,16 @@ import {FlashCardsComponent} from "./components/flash-cards/flash-cards.componen
 import {StartPopupComponent} from "./components/start-popup/start-popup.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    FlashCardsComponent,
-    StartPopupComponent
-  ],
-  providers: [],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        FlashCardsComponent,
+        StartPopupComponent
+    ],
+    providers: [],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   @ViewChild('startPopup') startPopup!: StartPopupComponent;
