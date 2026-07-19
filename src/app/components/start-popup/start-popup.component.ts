@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ChangeDetectionStrategy} from '@angular/core';
 import {StartSettings, SubCategory} from "../../type/flash-card.type";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 
@@ -11,6 +11,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
         ReactiveFormsModule
     ],
     templateUrl: './start-popup.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './start-popup.component.scss'
 })
 export class StartPopupComponent {

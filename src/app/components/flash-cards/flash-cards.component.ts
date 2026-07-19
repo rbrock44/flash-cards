@@ -1,11 +1,12 @@
 import {CommonModule, Location} from '@angular/common';
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FlashCard} from '../../type/flash-card.type';
 
 @Component({
     imports: [CommonModule],
     selector: 'app-flash-cards',
     templateUrl: './flash-cards.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./flash-cards.component.scss']
 })
 export class FlashCardsComponent implements OnInit {

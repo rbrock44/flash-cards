@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {getFlashCards} from "./services/flash-card.service";
 import {FlashCard, FlashcardsData, MainCategory, StartSettings, SubCategory} from "./type/flash-card.type";
@@ -16,6 +16,7 @@ import {StartPopupComponent} from "./components/start-popup/start-popup.componen
     ],
     providers: [],
     templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
