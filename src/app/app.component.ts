@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectionStrategy, PLATFORM_ID, Inject} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {getFlashCards} from "./services/flash-card.service";
 import {FlashCard, FlashcardsData, MainCategory, StartSettings, SubCategory} from "./type/flash-card.type";
-import {CommonModule, Location} from "@angular/common";
+import {CommonModule, isPlatformBrowser, Location} from "@angular/common";
 import {FlashCardsComponent} from "./components/flash-cards/flash-cards.component";
 import {StartPopupComponent} from "./components/start-popup/start-popup.component";
 
@@ -43,12 +43,19 @@ export class AppComponent implements OnInit {
   cardIndexUrlParam: string = 'cardIndex';
 
   constructor(
-      private location: Location
+      private location: Location,
+      @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
     getFlashCards().then((response) => {
       this.data = response;
+
+      if (!isPlatformBrowser(this.platformId)) {
+        // window/location is only available in the browser; the server render
+        // just needs the flash card data above, not the URL-driven selection.
+        return;
+      }
 
       const queryParams = new URLSearchParams(window.location.search);
       const categoryParam = queryParams.get(this.categoryUrlParam);
