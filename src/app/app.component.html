@@ -1,7 +1,8 @@
 <main class="main">
   <div class="content">
     <div class="container">
-      <div class="theme-toggle-row">
+      <div class="top-row">
+        <p *ngIf="this.flashCardReady" (click)="homeClick()" class="home-button">Home</p>
         <button
           type="button"
           class="theme-toggle"
@@ -61,9 +62,6 @@
         </div>
       </div>
       <div *ngIf="this.flashCardReady" class="flash-cards-container">
-        <div class="sticky-header">
-          <p (click)="homeClick()" class="home-button">Home</p>
-        </div>
         <p><strong>Main Category:</strong> {{this.selectedCategory?.name}}</p>
         <p><strong>Sub Category:</strong> {{this.selectedSubCategory?.name}}</p>
 

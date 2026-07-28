@@ -21,10 +21,13 @@
   box-shadow: 0 8px 24px var(--shadow);
 }
 
-.theme-toggle-row {
+.top-row {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  margin-bottom: 4px;
 }
 
 .theme-toggle {
@@ -78,7 +81,7 @@
   font-weight: 700;
   text-align: center;
   color: var(--text);
-  margin-bottom: 20px;
+  margin: 0 0 20px;
   white-space: nowrap;
 }
 
@@ -127,25 +130,16 @@
   background-color: var(--surface-hover);
 }
 
-.sticky-header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  padding: 0 10px 0 10px;
-}
-
 .home-button {
   display: inline-block;
-  margin-right: 20px;
+  margin-right: auto;
   padding: 0 10px 0 10px;
   font-size: 1rem;
   color: var(--accent-amber);
   text-decoration: none;
   border: 1px solid var(--accent-amber);
   border-radius: 5px;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
