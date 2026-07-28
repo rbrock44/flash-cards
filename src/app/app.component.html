@@ -1,6 +1,46 @@
 <main class="main">
   <div class="content">
     <div class="container">
+      <div class="theme-toggle-row">
+        <button
+          type="button"
+          class="theme-toggle"
+          role="switch"
+          [attr.aria-checked]="themeService.theme() === 'light'"
+          [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          (click)="themeService.toggle()"
+        >
+          <svg
+            class="icon icon-sun"
+            [class.is-active]="themeService.theme() === 'light'"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4.5" />
+            <line x1="12" y1="2.5" x2="12" y2="5" />
+            <line x1="12" y1="19" x2="12" y2="21.5" />
+            <line x1="2.5" y1="12" x2="5" y2="12" />
+            <line x1="19" y1="12" x2="21.5" y2="12" />
+            <line x1="5.1" y1="5.1" x2="6.8" y2="6.8" />
+            <line x1="17.2" y1="17.2" x2="18.9" y2="18.9" />
+            <line x1="5.1" y1="18.9" x2="6.8" y2="17.2" />
+            <line x1="17.2" y1="6.8" x2="18.9" y2="5.1" />
+          </svg>
+          <svg
+            class="icon icon-moon"
+            [class.is-active]="themeService.theme() === 'dark'"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 1 0 11 11z" />
+          </svg>
+        </button>
+      </div>
       <div *ngIf="!this.flashCardReady">
         <h1 class="title">Flash Cards</h1>
 

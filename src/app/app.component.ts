@@ -5,6 +5,7 @@ import {FlashCard, FlashcardsData, MainCategory, StartSettings, SubCategory} fro
 import {CommonModule, isPlatformBrowser, Location} from "@angular/common";
 import {FlashCardsComponent} from "./components/flash-cards/flash-cards.component";
 import {StartPopupComponent} from "./components/start-popup/start-popup.component";
+import {ThemeService} from "./services/theme.service";
 
 @Component({
     selector: 'app-root',
@@ -44,7 +45,8 @@ export class AppComponent implements OnInit {
 
   constructor(
       private location: Location,
-      @Inject(PLATFORM_ID) private platformId: Object
+      @Inject(PLATFORM_ID) private platformId: Object,
+      protected themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
