@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://flash-cards.ryan-brock.com/sitemap.xml
