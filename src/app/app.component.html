@@ -2,7 +2,15 @@
   <div class="content">
     <div class="container">
       <div class="top-row">
-        <p *ngIf="this.flashCardReady" (click)="homeClick()" class="home-button">Home</p>
+        <p
+          *ngIf="this.flashCardReady"
+          (click)="homeClick()"
+          (keydown.enter)="homeClick()"
+          (keydown.space)="$event.preventDefault(); homeClick()"
+          role="button"
+          tabindex="0"
+          class="home-button"
+        >Home</p>
         <button
           type="button"
           class="theme-toggle"
@@ -48,10 +56,23 @@
         <div class="links-section">
           <ul class="list-group">
             <li class="list-group-item" *ngFor="let mainCategory of data.categories; let i = index" (click)="toggleCategory(mainCategory, $event)">
-              <p>{{mainCategory.name}}</p>
+              <p
+                (keydown.enter)="toggleCategory(mainCategory, $event)"
+                (keydown.space)="$event.preventDefault(); toggleCategory(mainCategory, $event)"
+                role="button"
+                tabindex="0"
+              >{{mainCategory.name}}</p>
               <div *ngIf="selectedCategory === mainCategory && mainCategory.subCategories.length > 0">
                 <ul class="sub-list">
-                  <li *ngFor="let subCategory of mainCategory.subCategories" (click)="subCategoryClick(subCategory)" class="sub-list-item">
+                  <li
+                    *ngFor="let subCategory of mainCategory.subCategories"
+                    (click)="subCategoryClick(subCategory)"
+                    (keydown.enter)="subCategoryClick(subCategory)"
+                    (keydown.space)="$event.preventDefault(); subCategoryClick(subCategory)"
+                    role="button"
+                    tabindex="0"
+                    class="sub-list-item"
+                  >
                     {{subCategory.name}}
                   </li>
                 </ul>
