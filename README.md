@@ -32,6 +32,8 @@ Screenshots:
 This is a server side single-page angular frontend project powered by a single json file located in this [repo](https://github.com/rbrock44/flash-cards-data) <br/>
 It's purpose was to assist my girlfriend going through a medical coding class. It's been set up to expand far beyond that with several variations of a flash card (per category).
 
+Decks live as one `flash-card-data.json` file in that sibling repo, shaped as `categories -> subCategories -> flashCards`, where each flash card is `{ id, question, answer, example?, type? }`. This app doesn't read that file directly - it calls the `home-page-api` service, which fetches the raw JSON off `flash-cards-data`'s `master` branch on every request. To add or update a deck, edit `flash-card-data.json` in [flash-cards-data](https://github.com/rbrock44/flash-cards-data) and open a PR there; once it's merged to `master` the new cards show up here on the next load, no redeploy of this app needed.
+
 ---
 
 ## 🚦 How to Use
