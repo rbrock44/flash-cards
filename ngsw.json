@@ -1,0 +1,96 @@
+{
+  "configVersion": 1,
+  "timestamp": 1788659396395,
+  "index": "/index.csr.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.csr.html",
+        "/index.html",
+        "/main-FTIS7ZYP.js",
+        "/manifest.webmanifest",
+        "/polyfills-5CFQRCPP.js",
+        "/styles-J27KUIIN.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/icons/icon-128x128.png",
+        "/icons/icon-144x144.png",
+        "/icons/icon-152x152.png",
+        "/icons/icon-192x192.png",
+        "/icons/icon-384x384.png",
+        "/icons/icon-512x512.png",
+        "/icons/icon-72x72.png",
+        "/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "flash-cards-api",
+      "patterns": [
+        "https:\\/\\/home-page-api-34607\\.herokuapp\\.com\\/flash-cards"
+      ],
+      "strategy": "freshness",
+      "maxSize": 10,
+      "maxAge": 2592000000,
+      "timeoutMs": 5000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/icons/icon-128x128.png": "1d74a61433c34ac70ae8db8dd3b1bbf7371a4bc5",
+    "/icons/icon-144x144.png": "a88dc74eee63ca1be9f17f6ea93162d5aa5b1efe",
+    "/icons/icon-152x152.png": "2857efa11d2daec94a7cdb386a378d46c5c73e7c",
+    "/icons/icon-192x192.png": "1444d41ad234d3bb00656da16bd24db74e665e73",
+    "/icons/icon-384x384.png": "5e767cfd70797a56e32d541004047ab98d8f50bd",
+    "/icons/icon-512x512.png": "7fe34f4491c96c174b3a9c48ff2c976de9026315",
+    "/icons/icon-72x72.png": "d702a89ed6ef26289f3570ee31bb399caff3e94d",
+    "/icons/icon-96x96.png": "d4b7a204efae5ca408c5c2cb716d9474ec529730",
+    "/index.csr.html": "38861dfd9bb920c27a942330bddf361306c1259d",
+    "/index.html": "a8c515155d28f40231dc7d384e91b473960a9da6",
+    "/main-FTIS7ZYP.js": "a383f66eb14e6ab2e59c7e910acfdae46c6bd48f",
+    "/manifest.webmanifest": "466f3a45754e7593843f423b9a2d832275e256f0",
+    "/polyfills-5CFQRCPP.js": "f2241e9a25858f895ce299d15f6f22e849e2fd72",
+    "/styles-J27KUIIN.css": "3a838a77a0dd4e921ac2bb274c128f88d84bcff2"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
