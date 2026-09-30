@@ -59,36 +59,58 @@ export class AppComponent implements OnInit {
         return;
       }
 
-      const queryParams = new URLSearchParams(window.location.search);
-      const categoryParam = queryParams.get(this.categoryUrlParam);
-      const subCategoryParam = queryParams.get(this.subCategoryUrlParam);
+      this.restoreFromUrl(window.location.search);
 
-      if (categoryParam) {
-        this.selectedCategory = this.data.categories.find(x => x.name === categoryParam);
-
-        if (subCategoryParam) {
-          this.selectedSubCategory = this.selectedCategory!.subCategories.find(x => x.name === subCategoryParam)
-
-          const showQuestionParam = queryParams.get(this.showQuestionUrlParam) === 'true';
-          const isIndexOrderParam = queryParams.get(this.isIndexOrderUrlParam) === 'true';
-          const showExampleParam = queryParams.get(this.showExampleUrlParam) === 'true';
-
-          const idsInOrderParam = (queryParams.get(this.idsInOrderUrlParam) ?? '').split('-');
-
-          const ind = queryParams.get(this.cardIndexUrlParam);
-          const index = +(ind ? ind : '0');
-          this.cardIndex = index;
-
-          const newSettings = {
-            isIndexOrder: showQuestionParam,
-            showQuestionFirst: showQuestionParam,
-            showExampleAutomatically: showExampleParam,
-          };
-
-          this.startFlashCardsFromUrlParams(newSettings, idsInOrderParam);
-        }
+      // Slot a home entry in underneath a deck deep link so browser/mouse back lands on home.
+      if (this.flashCardReady) {
+        const deepLink = this.location.path();
+        this.location.replaceState(this.buildUrl(this.selectedCategory?.name));
+        this.location.go(deepLink);
       }
     });
+
+    // Browser/mouse back and forward land here; show whichever view the URL now names.
+    this.location.subscribe(() => {
+      if (this.data.categories.length > 0) {
+        this.restoreFromUrl(this.location.path().split('?')[1] ?? '');
+      }
+    });
+  }
+
+  private restoreFromUrl(search: string): void {
+    const queryParams = new URLSearchParams(search);
+    this.flashCardReady = false;
+    this.selectedCategory = undefined;
+    this.selectedSubCategory = undefined;
+    this.cardIndex = 0;
+    const categoryParam = queryParams.get(this.categoryUrlParam);
+    const subCategoryParam = queryParams.get(this.subCategoryUrlParam);
+
+    if (categoryParam) {
+      this.selectedCategory = this.data.categories.find(x => x.name === categoryParam);
+
+      if (subCategoryParam) {
+        this.selectedSubCategory = this.selectedCategory!.subCategories.find(x => x.name === subCategoryParam)
+
+        const showQuestionParam = queryParams.get(this.showQuestionUrlParam) === 'true';
+        const isIndexOrderParam = queryParams.get(this.isIndexOrderUrlParam) === 'true';
+        const showExampleParam = queryParams.get(this.showExampleUrlParam) === 'true';
+
+        const idsInOrderParam = (queryParams.get(this.idsInOrderUrlParam) ?? '').split('-');
+
+        const ind = queryParams.get(this.cardIndexUrlParam);
+        const index = +(ind ? ind : '0');
+        this.cardIndex = index;
+
+        const newSettings = {
+          isIndexOrder: showQuestionParam,
+          showQuestionFirst: showQuestionParam,
+          showExampleAutomatically: showExampleParam,
+        };
+
+        this.startFlashCardsFromUrlParams(newSettings, idsInOrderParam);
+      }
+    }
   }
 
   toggleCategory(category: any, event: Event) {
@@ -117,7 +139,7 @@ export class AppComponent implements OnInit {
     this.selectedCategory = undefined;
     this.selectedSubCategory = undefined;
 
-    this.location.replaceState(this.buildUrl());
+    this.location.go(this.buildUrl());
   }
 
   startFlashCards(settings: StartSettings) {
@@ -131,7 +153,7 @@ export class AppComponent implements OnInit {
 
     this.flashCardReady = true;
 
-    this.location.replaceState(this.buildUrl(this.selectedCategory!.name, this.selectedSubCategory!.name, ids));
+    this.location.go(this.buildUrl(this.selectedCategory!.name, this.selectedSubCategory!.name, ids));
   }
 
   startFlashCardsFromUrlParams(settings: StartSettings, ids: string[]) {
