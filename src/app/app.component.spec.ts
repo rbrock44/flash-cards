@@ -64,4 +64,25 @@ describe('AppComponent', () => {
     location.back();
     expect(app.flashCardReady).toBe(false);
   });
+
+  it('should restore the card order setting separately from the question setting', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const location = TestBed.inject(Location);
+    fixture.detectChanges();
+
+    app.data = {
+      categories: [{
+        name: 'Spanish',
+        subCategories: [{ name: 'Verbs', flashCards: [{ id: 'a', question: 'q1', answer: 'a1' }] }],
+      }],
+    } as unknown as FlashcardsData;
+
+    location.go('/?category=Spanish&subCategory=Verbs&showQuestionFirst=true&isIndexOrder=false&showExampleAutomatically=true&idsInOrder=a');
+    location.go('/');
+    location.back();
+
+    expect(app.settings.showQuestionFirst).toBe(true);
+    expect(app.settings.isIndexOrder).toBe(false);
+  });
 });

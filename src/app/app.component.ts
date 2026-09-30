@@ -103,7 +103,7 @@ export class AppComponent implements OnInit {
         this.cardIndex = index;
 
         const newSettings = {
-          isIndexOrder: showQuestionParam,
+          isIndexOrder: isIndexOrderParam,
           showQuestionFirst: showQuestionParam,
           showExampleAutomatically: showExampleParam,
         };
